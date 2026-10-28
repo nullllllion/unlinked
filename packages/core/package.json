@@ -1,0 +1,11 @@
+{
+  "name": "@unlinked/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "Pure logic shared by the extension and the attester: JSON-RPC planning, isolation keys, leak detection, Arkiv queries and verdicts.",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

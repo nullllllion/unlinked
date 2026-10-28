@@ -1,0 +1,11 @@
+{
+  "name": "@unlinked/spy-rpc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "A JSON-RPC proxy that logs what an RPC provider learns about each caller. For demos.",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

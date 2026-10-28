@@ -1,0 +1,19 @@
+{
+  "name": "@unlinked/extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.mjs",
+    "e2e": "node build.mjs && node test/e2e.mjs"
+  },
+  "dependencies": {
+    "@anon-rpc/browser-extension-harness": "0.4.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.7",
+    "esbuild": "^0.28.2",
+    "playwright": "^1.64.1"
+  }
+}

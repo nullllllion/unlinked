@@ -1,0 +1,43 @@
+# Rebuild from this commit and attest both builds on Arkiv.
+# A second, independent rebuilder runs the same CLI from their own wallet;
+# matching roots are what the extension shows as "2 attesters".
+name: attest
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+      - name: Attest the extension
+        env:
+          PRIVATE_KEY: ${{ secrets.ARKIV_ATTESTER_KEY }}
+        run: >
+          node packages/attest/src/attest.ts --dir packages/extension/dist/unpacked --kind extension
+          --name unlinked --repo "github.com/${{ github.repository }}" --commit "${{ github.sha }}"
+          --version "$(node -p 'require("./packages/extension/package.json").version')"
+
+      - name: Attest Quiet Swap
+        env:
+          PRIVATE_KEY: ${{ secrets.ARKIV_ATTESTER_KEY }}
+        run: >
+          node packages/attest/src/attest.ts --dir packages/quiet-swap/dist --kind frontend
+          --name quiet-swap --repo "github.com/${{ github.repository }}" --commit "${{ github.sha }}"
+          --version "$(node -p 'require("./packages/quiet-swap/package.json").version')"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unlinked-extension
+          path: packages/extension/dist/*.zip

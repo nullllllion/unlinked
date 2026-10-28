@@ -1,0 +1,26 @@
+{
+  "name": "unlinked",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test \"packages/core/test/*.test.ts\"",
+    "typecheck": "tsc -p packages/core && tsc -p packages/extension && tsc -p packages/attest && tsc -p packages/quiet-swap",
+    "build": "npm run build -w @unlinked/extension && npm run build -w @unlinked/quiet-swap",
+    "e2e": "npm run e2e -w @unlinked/extension",
+    "attest": "node packages/attest/src/attest.ts",
+    "verify": "node packages/attest/src/verify.ts",
+    "spy": "node packages/spy-rpc/server.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}

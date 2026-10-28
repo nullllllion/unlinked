@@ -1,0 +1,5 @@
+node_modules/
+dist/
+packages/extension/test/artifacts/
+.env
+*.log

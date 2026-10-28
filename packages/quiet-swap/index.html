@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Quiet Swap</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <main class="card">
+      <header class="head">
+        <h1>Quiet Swap</h1>
+        <button id="connect" class="chip">Connect wallet</button>
+      </header>
+
+      <label class="leg">
+        <span class="leg-top"><span>You pay</span><span id="eth-balance" class="muted"></span></span>
+        <span class="leg-row">
+          <input id="amount" inputmode="decimal" autocomplete="off" spellcheck="false" value="0.001" aria-label="ETH amount" />
+          <span class="token">ETH</span>
+        </span>
+      </label>
+
+      <div class="leg">
+        <span class="leg-top"><span>You receive</span><span id="usdc-balance" class="muted"></span></span>
+        <span class="leg-row">
+          <output id="quote" class="out">–</output>
+          <span class="token">USDC</span>
+        </span>
+        <span id="min" class="muted small"></span>
+      </div>
+
+      <button id="swap" class="primary" disabled>Connect a wallet to swap</button>
+      <p id="status" class="status" role="status"></p>
+
+      <footer class="foot muted small">
+        Uniswap v4 · Sepolia · ETH/USDC 0.3% · reads via <span id="rpc-host"></span>
+      </footer>
+    </main>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
